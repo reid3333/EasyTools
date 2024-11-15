@@ -34,7 +34,7 @@ if not exist %PORTABLE_GIT_BIN%\ (
 	endlocal
 )
 
-set "PATH=%PORTABLE_GIT_DIR%;%PATH%"
+set "PATH=%PORTABLE_GIT_BIN%;%PATH%"
 
 where /Q git
 if %ERRORLEVEL% equ 0 ( goto :EASY_GIT_FOUND )
