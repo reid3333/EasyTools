@@ -43,7 +43,7 @@ if not exist %CURL_EXE% (
 )
 set CURL_CMD=C:\Windows\System32\curl.exe -kL
 
-echo "モデルなどをダウンロードします。よろしいですか？ [y/n]（空欄なら y）"
+echo "動作に必要なモデルなどをダウンロードします。よろしいですか？ [y/n]（空欄なら y）"
 echo "Download Model etc. Are you sure? [y/n] (default: y)"
 set /p DOWNLOAD_MDOEL_YES_OR_NO=
 
@@ -76,7 +76,7 @@ if not exist %PORTABLE_GIT_BIN%\ (
 	endlocal
 )
 
-set "PATH=%PORTABLE_GIT_DIR%;%PATH%"
+set "PATH=%PORTABLE_GIT_BIN%;%PATH%"
 
 where /Q git
 if %ERRORLEVEL% equ 0 ( goto :EASY_GIT_FOUND )
