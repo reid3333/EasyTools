@@ -1,10 +1,11 @@
 @echo off
 chcp 65001 > NUL
 
-call %~dp0Git-SetPath.bat
+call %~dp0Git_SetPath.bat
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
 set GIT_CLONE_OR_PULL_URL=%~1
+echo.
 echo %GIT_CLONE_OR_PULL_URL%
 
 for /f "tokens=*" %%i in ("%GIT_CLONE_OR_PULL_URL%") do set GIT_CLONE_OR_PULL_DIR=%%~nxi
