@@ -10,9 +10,9 @@ set VERSION_ID=%~4
 set "MODEL_URL=https://civitai.com/models/%MODEL_ID%?modelVersionId=%VERSION_ID%"
 echo %MODEL_URL% %DOWNLOAD_FILE%
 
-set CONFIG_PATH=%~dp0..\..\stable-diffusion-webui-reForge\config.json
-if exist "%CONFIG_PATH%" (
-	if "%CIVITAI_API_KEY%"=="" (
+if "CIVITAI_API_KEY"=="" (
+	set CONFIG_PATH=%~dp0..\..\stable-diffusion-webui-reForge\config.json
+	if exist "%CONFIG_PATH%" (
 		for /f "tokens=*" %%i in ('%PS_CMD% -c "$json = Get-Content -Raw -Path '%CONFIG_PATH%' | ConvertFrom-Json; $json.ch_civiai_api_key"') do set "CIVITAI_API_KEY=%%i"
 	)
 )
@@ -20,6 +20,7 @@ if exist "%CONFIG_PATH%" (
 if "%CIVITAI_API_KEY%"=="" (
 	echo "[ERROR] Stable Diffusion WebUI の Settings で Civitai の API Key を設定してください。"
 	echo https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper/wiki/Civitai-API-Key
+	exit /b 1
 )
 
 set "DOWNLOAD_URL=https://civitai.com/api/download/models/%VERSION_ID%?token=%CIVITAI_API_KEY%"
