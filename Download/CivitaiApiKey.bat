@@ -1,6 +1,11 @@
 @echo off
 chcp 65001 > NUL
 
+echo "非対応"
+pause
+exit /b 1
+@REM 対応するなら Civitai Helper 用に cofig.json の書き戻しもほしいが、今はそこまででない
+
 echo "Civitai のアカウントを作成して、APIキーを取得して、設定してください。"
 echo "アカウント設定の一番下の方で取得できます。https://civitai.com/user/account Ctrl+クリックで開く"
 echo "参考: https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper/wiki/Civitai-API-Key"
