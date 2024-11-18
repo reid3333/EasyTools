@@ -10,7 +10,7 @@ set VERSION_ID=%~4
 set "MODEL_URL=https://civitai.com/models/%MODEL_ID%?modelVersionId=%VERSION_ID%"
 echo %MODEL_URL% %DOWNLOAD_FILE%
 
-if "CIVITAI_API_KEY"=="" (
+if "%CIVITAI_API_KEY%"=="" (
 	set CONFIG_PATH=%~dp0..\..\stable-diffusion-webui-reForge\config.json
 	if exist "%CONFIG_PATH%" (
 		for /f "tokens=*" %%i in ('%PS_CMD% -c "$json = Get-Content -Raw -Path '%CONFIG_PATH%' | ConvertFrom-Json; $json.ch_civiai_api_key"') do set "CIVITAI_API_KEY=%%i"
