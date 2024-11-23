@@ -9,9 +9,10 @@ if len(sys.argv) < 3:
 
 local_dir = sys.argv[1]
 repo_id = sys.argv[2]
+repo_type = sys.argv[3]
 allow_patterns = ["*"]
-if len(sys.argv) > 3:
-    allow_patterns = sys.argv[3:]
+if len(sys.argv) > 4:
+    allow_patterns = sys.argv[4:]
 
 print(f"https://huggingface.co/{repo_id}")
 
@@ -21,4 +22,4 @@ print(f"https://huggingface.co/{repo_id}")
 # print(f"    allow_patterns={allow_patterns},")
 # print(")")
 
-path = snapshot_download(local_dir=local_dir, repo_id=repo_id, allow_patterns=allow_patterns)
+path = snapshot_download(local_dir=local_dir, repo_id=repo_id, repo_type=repo_type, allow_patterns=allow_patterns)
