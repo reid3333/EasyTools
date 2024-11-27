@@ -18,10 +18,12 @@ for /f %%i in ('%PS_CMD% -c "Get-Date -Format yyyyMMdd_HHmm_ssff"') do (
 )
 
 if exist "%LINK_DST%" (
+	setlocal enabledelayedexpansion
 	echo ren "%LINK_DST%" "%NEW_NAME%"
 	ren "%LINK_DST%" "%NEW_NAME%"
+	if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
+	endlocal
 )
-if %ERRORLEVEL% neq 0 ( pause & exit /b 1 )
 
 echo mklink /j "%LINK_DST%" "%LINK_SRC%"
 mklink /j "%LINK_DST%" "%LINK_SRC%"
