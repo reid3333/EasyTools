@@ -134,4 +134,13 @@ if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 exit /b 0
 
 :FINALIZE
+@REM HKEY_LOCAL_MACHINE の変更には管理者権限が必要
+echo reg add "HKCU\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f
+reg add "HKCU\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f
+if %ERRORLEVEL% neq 0 (
+	echo "Windows の長いパス対応を有効にできませんでした。"
+	echo "Windows の管理者権限で EasyTools/EnableLongPaths.bat を実行してください。"
+	pause
+)
+
 if exist "%~0" ( del "%~0" )
