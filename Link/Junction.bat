@@ -7,6 +7,8 @@ set LINK_DST_DIR=%~dp1
 set LINK_DST_NAME=%~nx1
 set LINK_SRC=%~2
 
+echo.
+
 @REM DST がリンク済みなら別パスへのリンクかもしれないので再リンク
 for /f "delims=" %%i in ('dir /aL /b "%LINK_DST_DIR%" 2^>NUL') do (
 	if /i "%%~i"=="%LINK_DST_NAME%" ( rmdir "%LINK_DST%" )

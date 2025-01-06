@@ -9,6 +9,7 @@ set "REPO_DIR=%~4"
 set "HF_MODEL_CARD=https://huggingface.co/%REPO_ID%"
 set "HF_DOWNLOAD_URL=%HF_MODEL_CARD%/resolve/main/%REPO_DIR%%DOWNLOAD_FILE%"
 
+echo.
 echo %HF_MODEL_CARD% %REPO_DIR%%DOWNLOAD_FILE%
 
 call "%~dp0Aria.bat" "%DOWNLOAD_DIR%" "%DOWNLOAD_FILE%" "%HF_DOWNLOAD_URL%"
