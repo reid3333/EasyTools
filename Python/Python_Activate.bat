@@ -51,8 +51,21 @@ if not "%PYTHON_VERSION_VAR:~7,4%"=="%ACTIVATE_PYTHON_VERSION%" (
 		%LOCAL_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 	)
+
+	if not exist %PYTHON_DIR%\include\Python.h (
+		echo %PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
+		%PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
+		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
+	)
+
+	if not exist %PYTHON_DIR%\Scripts\tcl86t.dll (
+		echo %PS_CMD% Expand-Archive -Force -Path %~dp0python_tkinter-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
+		%PS_CMD% Expand-Archive -Force -Path %~dp0python_tkinter-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
+		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
+	)
 	endlocal
 )
+
 
 
 for /f "tokens=*" %%i in ('%PYTHON_CMD% --version 2^>^&1') do set PYTHON_VERSION_VAR=%%i
