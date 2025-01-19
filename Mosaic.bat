@@ -14,7 +14,7 @@ if not exist %~dp0Mosaic\%MOSAIC%\venv\ (
 
 pushd %~dp0Mosaic\%MOSAIC%\
 
-call %~dp0Python\Python_Activate.bat
+call %~dp0Python\Python_ActivateTkinter.bat
 if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
 echo python mosaic.py %*

@@ -57,12 +57,6 @@ if not "%PYTHON_VERSION_VAR:~7,4%"=="%ACTIVATE_PYTHON_VERSION%" (
 		%PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 	)
-
-	if not exist %PYTHON_DIR%\Scripts\tcl86t.dll (
-		echo %PS_CMD% Expand-Archive -Force -Path %~dp0python_tkinter-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
-		%PS_CMD% Expand-Archive -Force -Path %~dp0python_tkinter-%INSTALL_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
-		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
-	)
 	endlocal
 )
 
