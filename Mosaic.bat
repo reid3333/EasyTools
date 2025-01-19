@@ -19,6 +19,7 @@ if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
 echo python mosaic.py %*
 python mosaic.py %*
-if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+@REM ファイル未選択時にエラー扱いになるので無効にする
+@REM if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
 popd rem %~dp0Mosaic\\%MOSAIC%\
