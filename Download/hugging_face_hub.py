@@ -4,7 +4,7 @@ import sys
 from huggingface_hub import snapshot_download
 
 if len(sys.argv) < 3:
-    print("Usage: download_huggingface.py <local_dir> <repo_id> [<allow_patterns>...]")
+    print("Usage: download_huggingface.py <local_dir> <repo_id> <repo_type> [<allow_patterns>...]")
     sys.exit(1)
 
 local_dir = sys.argv[1]
