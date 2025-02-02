@@ -24,4 +24,4 @@ if "%CIVITAI_API_KEY%"=="" (
 
 set "DOWNLOAD_URL=https://civitai.com/api/download/models/%VERSION_ID%?token=%CIVITAI_API_KEY%"
 call "%~dp0Aria.bat" "%DOWNLOAD_DIR%" "%DOWNLOAD_FILE%" "%DOWNLOAD_URL%"
-if %ERRORLEVEL% neq 0 ( exit /b 1)
+if %ERRORLEVEL% neq 0 ( exit /b 1 )

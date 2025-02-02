@@ -23,13 +23,13 @@ if exist "%DOWNLOAD_DIR%%DOWNLOAD_FILE%" (
 
 echo call "%~dp0Civitai_ModelDownload.bat" "%DOWNLOAD_DIR%" "%DOWNLOAD_ZIP_FILE%" %MODEL_ID% %VERSION_ID%
 call "%~dp0Civitai_ModelDownload.bat" "%DOWNLOAD_DIR%" "%DOWNLOAD_ZIP_FILE%" %MODEL_ID% %VERSION_ID%
-if %ERRORLEVEL% neq 0 ( exit /b 1)
+if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
 set DOWNLOAD_ZIP_PATH=%DOWNLOAD_DIR%\%DOWNLOAD_ZIP_FILE%
 echo %PS_CMD% "try { Expand-Archive -Path %DOWNLOAD_ZIP_PATH% -DestinationPath %DOWNLOAD_DIR% -Force } catch { exit 1 }"
 %PS_CMD% "try { Expand-Archive -Path %DOWNLOAD_ZIP_PATH% -DestinationPath %DOWNLOAD_DIR% -Force } catch { exit 1 }"
-if %ERRORLEVEL% neq 0 ( pause & exit /b 1)
+if %ERRORLEVEL% neq 0 ( pause & exit /b 1 )
 
 echo del /Q %DOWNLOAD_ZIP_PATH%
 del /Q %DOWNLOAD_ZIP_PATH%
-if %ERRORLEVEL% neq 0 ( pause & exit /b 1)
+if %ERRORLEVEL% neq 0 ( pause & exit /b 1 )
