@@ -5,6 +5,7 @@ set PYTHON_ACTIVATE=%~dp0..\Python\Python_Activate.bat
 
 pushd %~dp0
 
+@REM https://github.com/nekotodance/SdImageDiet
 call %GITHUB_CLONE_OR_PULL_HASH% nekotodance SdImageDiet main
 if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
