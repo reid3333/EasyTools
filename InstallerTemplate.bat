@@ -47,7 +47,7 @@ echo "動作に必要なモデルなどをダウンロードします。よろ�
 echo "Download Model etc. Are you sure? [y/n] (default: y)"
 set /p DOWNLOAD_MDOEL_YES_OR_NO=
 
-@REM ---- ここから Git/Get_SetPath.bat と同期 ----
+@REM ---- ここから Git/Git_SetPath.bat と同期 ----
 where /Q git
 if %ERRORLEVEL% equ 0 ( goto :EASY_GIT_FOUND )
 cd > NUL
@@ -84,7 +84,7 @@ echo "[Error] Git をインストールできませんでした。手動で Git 
 pause & exit /b 1
 
 :EASY_GIT_FOUND
-@REM ---- ここまで Git/Get_SetPath.bat と同期 --------
+@REM ---- ここまで Git/Git_SetPath.bat と同期 --------
 
 call :INIT_REPO %EASY_TOOLS_DIR% %EASY_TOOLS_URL% %EASY_TOOLS_BRANCH%
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
