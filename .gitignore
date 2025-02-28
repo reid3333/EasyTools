@@ -11,4 +11,6 @@
 /LlamaCpp/LlamaCpp_Version.txt
 /Mosaic/*/
 /Python/env/
+/Python/venv/
+/Python/Python_DefaultVersion.txt
 /SdImageDiet/SdImageDiet/

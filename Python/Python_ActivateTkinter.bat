@@ -6,15 +6,15 @@ call %~dp0Python_Activate.bat
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
 cd > NUL
-python -c "import tkinter" > NUL 2>&1
+python -c "import tkinter; root = tkinter.Tk()" > NUL 2>&1
 if %ERRORLEVEL% equ 0 ( exit /b 0 )
 
-echo %PS_CMD% Expand-Archive -Path %~dp0python_tkinter-3.10.6.zip -DestinationPath %VIRTUAL_ENV_DIR% -Force
-%PS_CMD% Expand-Archive -Path %~dp0python_tkinter-3.10.6.zip -DestinationPath %VIRTUAL_ENV_DIR% -Force
+echo %PS_CMD% Expand-Archive -Path "%~dp0python_tkinter-%EASY_PYTHON_VERSION%.zip" -DestinationPath %VIRTUAL_ENV_DIR% -Force
+%PS_CMD% Expand-Archive -Path "%~dp0python_tkinter-%EASY_PYTHON_VERSION%.zip" -DestinationPath %VIRTUAL_ENV_DIR% -Force
 if %ERRORLEVEL% neq 0 ( pause & exit /b 1 )
 
 cd > NUL
-python -c "import tkinter" > NUL 2>&1
+python -c "import tkinter; root = tkinter.Tk()" > NUL 2>&1
 if %ERRORLEVEL% neq 0 (
 	echo "[ERROR] Python に tkinter がインストールされていません。"
 	echo "[ERROR] Python does not have tkinter installed."
