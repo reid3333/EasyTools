@@ -3,6 +3,10 @@
 /Download/Aria_MaxConnection.txt
 /Civitai/CivitaiApiKey.txt
 /EasyTools/
+/Ffmpeg/env/
+/Ffmpeg/*.mp4
+/Ffmpeg/*.webp
+/Ffmpeg/*.wav
 /GenImageViewer/GenImageViewer/
 /Git/env/
 /InfiniteImageBrowsing/sd-webui-infinite-image-browsing/
