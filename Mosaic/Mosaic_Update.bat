@@ -27,8 +27,8 @@ pushd %~dp0%MOSAIC%
 call ..\..\Python\Python_Activate.bat
 if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
-echo python -m pip install -qq --upgrade pip
-python -m pip install -qq --upgrade pip
+echo python -m pip install -qq -U pip setuptools wheel
+python -m pip install -qq -U pip setuptools wheel
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
 @REM echo pip install -r requirements.txt
