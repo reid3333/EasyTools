@@ -3,7 +3,7 @@ chcp 65001 > NUL
 set ARIA=%~dp0..\Download\Aria.bat
 set PS_CMD=PowerShell -Version 5.1 -NoProfile -ExecutionPolicy Bypass
 
-set LLAMA_CPP_DEFAULT_VERSION=b4689
+set LLAMA_CPP_DEFAULT_VERSION=b5092
 
 pushd %~dp0
 if not exist LlamaCpp_Version.txt (
