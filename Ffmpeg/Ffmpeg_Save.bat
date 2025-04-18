@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 > NUL
 set "EASY_FFMPEG=%~dp0env\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe"
-set EASY_FFMPEG_CRF=19
+set EASY_FFMPEG_CRF=25
 
 if not exist "%EASY_FFMPEG%" ( call "%~dp0Ffmpeg_Setup.bat" )
 if not exist "%EASY_FFMPEG%" (
