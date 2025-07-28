@@ -1,4 +1,10 @@
-﻿/Download/env/
+﻿/ComfyUi/ComfyUi_Version.txt
+/ComfyUi/ComfyUiManager_Version.txt
+/ComfyUi/SageAttention_Version.txt
+/ComfyUi/Torch_Version.txt
+/ComfyUi/Triton_Version.txt
+/ComfyUi/vc_redist.x64.exe
+/Download/env/
 /Download/ARIA_USE_CURL
 /Download/Aria_MaxConnection.txt
 /Civitai/CivitaiApiKey.txt
