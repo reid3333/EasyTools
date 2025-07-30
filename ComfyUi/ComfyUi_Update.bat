@@ -36,7 +36,7 @@ python -m pip install -qq -U pip setuptools wheel
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
 if not exist "%~dp0Torch_Version.txt" (
-	echo torch==2.7.1+cu128 torchvision==0.22.1+cu128 torchaudio==2.7.1+cu128 --index-url https://download.pytorch.org/whl/cu128> "%~dp0Torch_Version.txt"
+	echo torch==2.7.1+cu128 torchvision==0.22.1+cu128 torchaudio==2.7.1+cu128 xformers==0.0.31.post1 --index-url https://download.pytorch.org/whl/cu128> "%~dp0Torch_Version.txt"
 )
 set /p TORCH_VERSION=<"%~dp0Torch_Version.txt"
 echo pip install -qq %TORCH_VERSION%
