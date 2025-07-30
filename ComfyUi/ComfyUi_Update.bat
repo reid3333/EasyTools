@@ -6,7 +6,7 @@ set GITHUB_CLONE_OR_PULL_TAG=%EASY_TOOLS%\Git\GitHub_CloneOrPull_Tag.bat
 set PYTHON_ACTIVATE=%EASY_TOOLS%\Python\Python_Activate.bat
 set EMBEDDABLE_PYTHON=%EASY_TOOLS%\Python\env\python312
 
-@REM if exist %~dp0vc_redist.x64.exe ( goto :EXIST_VC_REDIST_X64 )
+if exist %~dp0vc_redist.x64.exe ( goto :EXIST_VC_REDIST_X64 )
 echo.
 echo %CURL_CMD% -o %~dp0vc_redist.x64.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
 %CURL_CMD% -o %~dp0vc_redist.x64.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
