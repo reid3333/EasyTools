@@ -17,61 +17,65 @@ if "%EASY_PYTHON_VERSION%" == "" (
 set EASY_PYTHON_MINOR_VERSION=%EASY_PYTHON_VERSION:~0,5%
 set EASY_PYTHON_VERSION_3=%EASY_PYTHON_MINOR_VERSION:.=%
 
-set PYTHON_DIR="%~dp0env\python%EASY_PYTHON_VERSION_3%"
-set LOCAL_PYTHON_CMD=%PYTHON_DIR%\python.exe
+set "EASY_PORTABLE_PYTHON_DIR=%~dp0env\python%EASY_PYTHON_VERSION_3%"
+set "EASY_PORTABLE_PYTHON_CMD=%EASY_PORTABLE_PYTHON_DIR%\python.exe"
+set "EASY_PYTHON_CMD=python"
 
-for /f "tokens=*" %%i in ('%PYTHON_CMD% --version 2^>^&1') do set PYTHON_VERSION_VAR=%%i
+for /f "tokens=*" %%i in ('%EASY_PYTHON_CMD% --version 2^>^&1') do set PYTHON_VERSION_VAR=%%i
 if not "%PYTHON_VERSION_VAR:~7,5%"=="%EASY_PYTHON_MINOR_VERSION%" (
-	set PYTHON_CMD=%LOCAL_PYTHON_CMD%
+	set "PYTHON_CMD=%EASY_PORTABLE_PYTHON_CMD%"
+	set "EASY_PYTHON_CMD=%EASY_PORTABLE_PYTHON_CMD%"
+	set "PYTHON_DIR=%EASY_PORTABLE_PYTHON_DIR%"
+
 	setlocal enabledelayedexpansion
-	if not exist %PYTHON_DIR%\ (
+	if not exist %EASY_PORTABLE_PYTHON_DIR%\ (
 		echo https://www.python.org/
 		echo https://github.com/pypa/get-pip
-		mkdir %PYTHON_DIR%
+		mkdir %EASY_PORTABLE_PYTHON_DIR%
 
 		echo %CURL_CMD% -o %~dp0env\python.zip https://www.python.org/ftp/python/%EASY_PYTHON_VERSION%/python-%EASY_PYTHON_VERSION%-embed-amd64.zip
 		%CURL_CMD% -o %~dp0env\python.zip https://www.python.org/ftp/python/%EASY_PYTHON_VERSION%/python-%EASY_PYTHON_VERSION%-embed-amd64.zip
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 
-		echo %PS_CMD% Expand-Archive -Path %~dp0env\python.zip -DestinationPath %PYTHON_DIR%
-		%PS_CMD% Expand-Archive -Path %~dp0env\python.zip -DestinationPath %PYTHON_DIR%
+		echo %PS_CMD% Expand-Archive -Path %~dp0env\python.zip -DestinationPath %EASY_PORTABLE_PYTHON_DIR%
+		%PS_CMD% Expand-Archive -Path %~dp0env\python.zip -DestinationPath %EASY_PORTABLE_PYTHON_DIR%
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 
 		echo del %~dp0env\python.zip
 		del %~dp0env\python.zip
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 
-		echo %PS_CMD% "try { &{(Get-Content '%PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth') -creplace '#import site', 'import site' | Set-Content '%PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth' } } catch { exit 1 }"
-		%PS_CMD% "try { &{(Get-Content '%PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth') -creplace '#import site', 'import site' | Set-Content '%PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth' } } catch { exit 1 }"
+		echo %PS_CMD% "try { &{(Get-Content '%EASY_PORTABLE_PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth') -creplace '#import site', 'import site' | Set-Content '%EASY_PORTABLE_PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth' } } catch { exit 1 }"
+		%PS_CMD% "try { &{(Get-Content '%EASY_PORTABLE_PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth') -creplace '#import site', 'import site' | Set-Content '%EASY_PORTABLE_PYTHON_DIR%/python%EASY_PYTHON_VERSION_3%._pth' } } catch { exit 1 }"
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 
-		echo %CURL_CMD% -o %PYTHON_DIR%\get-pip.py https://bootstrap.pypa.io/get-pip.py
-		%CURL_CMD% -o %PYTHON_DIR%\get-pip.py https://bootstrap.pypa.io/get-pip.py
+		echo %CURL_CMD% -o %EASY_PORTABLE_PYTHON_DIR%\get-pip.py https://bootstrap.pypa.io/get-pip.py
+		%CURL_CMD% -o %EASY_PORTABLE_PYTHON_DIR%\get-pip.py https://bootstrap.pypa.io/get-pip.py
 		@REM プロキシ環境用コマンド。ただし動作未確認、かつ Python をインストールしたほうが楽。
-		@REM %CURL_CMD% -o %PYTHON_DIR%\get-pip.py https://bootstrap.pypa.io/get-pip.py --proxy="PROXY_SERVER:PROXY_PORT"
+		@REM %CURL_CMD% -o %EASY_PORTABLE_PYTHON_DIR%\get-pip.py https://bootstrap.pypa.io/get-pip.py --proxy="PROXY_SERVER:PROXY_PORT"
 		if %ERRORLEVEL% neq 0 (
 			echo "[Error] プロキシ環境によりインストールに失敗した可能性があります。Python %EASY_PYTHON_MINOR_VERSION% 系をパスを通してインストールしてください。"
 			pause & exit /b 1
 		)
 
-		echo %LOCAL_PYTHON_CMD% %PYTHON_DIR%\get-pip.py --no-warn-script-location
-		%LOCAL_PYTHON_CMD% %PYTHON_DIR%\get-pip.py --no-warn-script-location
+		echo %EASY_PORTABLE_PYTHON_CMD% %EASY_PORTABLE_PYTHON_DIR%\get-pip.py --no-warn-script-location
+		%EASY_PORTABLE_PYTHON_CMD% %EASY_PORTABLE_PYTHON_DIR%\get-pip.py --no-warn-script-location
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 
-		echo %LOCAL_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
-		%LOCAL_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
+		echo %EASY_PORTABLE_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
+		%EASY_PORTABLE_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 	)
 
-	if not exist %PYTHON_DIR%\include\Python.h (
-		echo %PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%EASY_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
-		%PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%EASY_PYTHON_VERSION%.zip -DestinationPath %PYTHON_DIR%
+	if not exist %EASY_PORTABLE_PYTHON_DIR%\include\Python.h (
+		echo %PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%EASY_PYTHON_VERSION%.zip -DestinationPath %EASY_PORTABLE_PYTHON_DIR%
+		%PS_CMD% Expand-Archive -Force -Path %~dp0python_include_libs-%EASY_PYTHON_VERSION%.zip -DestinationPath %EASY_PORTABLE_PYTHON_DIR%
 		if !ERRORLEVEL! neq 0 ( pause & endlocal & exit /b 1 )
 	)
 	endlocal
 )
 
-for /f "tokens=*" %%i in ('%PYTHON_CMD% --version 2^>^&1') do set PYTHON_VERSION_VAR2=%%i
+for /f "tokens=*" %%i in ('%EASY_PYTHON_CMD% --version 2^>^&1') do set PYTHON_VERSION_VAR2=%%i
 if not "%PYTHON_VERSION_VAR2:~7,5%"=="%EASY_PYTHON_MINOR_VERSION%" (
 	echo %PYTHON_VERSION_VAR2%
 	echo "[Error] 何らかの理由で Python をインストールできませんでした。Python %EASY_PYTHON_MINOR_VERSION% 系をパスを通してインストールしてください。"
@@ -85,15 +89,15 @@ if not "%~1"=="" (
 )
 
 if not exist %VIRTUAL_ENV_DIR%\ (
-	echo %PYTHON_CMD% -m venv %VIRTUAL_ENV_DIR%
-	%PYTHON_CMD% -m venv %VIRTUAL_ENV_DIR%
+	echo %EASY_PYTHON_CMD% -m venv %VIRTUAL_ENV_DIR%
+	%EASY_PYTHON_CMD% -m venv %VIRTUAL_ENV_DIR%
 
 	if not exist %VIRTUAL_ENV_DIR%\ (
-		echo %PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
-		%PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
+		echo %EASY_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
+		%EASY_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
 
-		echo %PYTHON_CMD% -m virtualenv --copies %VIRTUAL_ENV_DIR%
-		%PYTHON_CMD% -m virtualenv --copies %VIRTUAL_ENV_DIR%
+		echo %EASY_PYTHON_CMD% -m virtualenv --copies %VIRTUAL_ENV_DIR%
+		%EASY_PYTHON_CMD% -m virtualenv --copies %VIRTUAL_ENV_DIR%
 	)
 
 	if not exist %VIRTUAL_ENV_DIR%\ (

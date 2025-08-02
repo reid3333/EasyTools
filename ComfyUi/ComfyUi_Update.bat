@@ -4,7 +4,6 @@ set CURL_CMD=C:\Windows\System32\curl.exe -kL
 set EASY_TOOLS=%~dp0..
 set GITHUB_CLONE_OR_PULL_TAG=%EASY_TOOLS%\Git\GitHub_CloneOrPull_Tag.bat
 set PYTHON_ACTIVATE=%EASY_TOOLS%\Python\Python_Activate.bat
-set EMBEDDABLE_PYTHON=%EASY_TOOLS%\Python\env\python312
 
 if exist %~dp0vc_redist.x64.exe ( goto :EXIST_VC_REDIST_X64 )
 echo.
@@ -25,6 +24,7 @@ if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
 pushd ComfyUI
 
+@REM https://github.com/comfyanonymous/ComfyUI#manual-install-windows-linux
 if not exist "%EASY_TOOLS%\Python\Python_DefaultVersion.txt" (
 	echo 3.12.9> "%EASY_TOOLS%\Python\Python_DefaultVersion.txt"
 )
@@ -64,19 +64,19 @@ echo rmdir /S /Q "%TORCH_INDUCTOR_TEMP%"
 rmdir /S /Q "%TORCH_INDUCTOR_TEMP%"
 :EASY_TORCH_INDUCTOR_TEMP_NOT_FOUND
 
-if exist %EMBEDDABLE_PYTHON%\ (
+if exist %EASY_PORTABLE_PYTHON_DIR%\ (
 	@REM tcc.exe & VS Build Tools cl.exe
 	if not exist venv\Scripts\Include\Python.h (
-		echo xcopy /SQY %EMBEDDABLE_PYTHON%\include\*.* venv\Scripts\Include\
-		xcopy /SQY %EMBEDDABLE_PYTHON%\include\*.* venv\Scripts\Include\
-		echo xcopy /SQY %EMBEDDABLE_PYTHON%\libs\*.* venv\Scripts\libs\
-		xcopy /SQY %EMBEDDABLE_PYTHON%\libs\*.* venv\Scripts\libs\
+		echo xcopy /SQY %EASY_PORTABLE_PYTHON_DIR%\include\*.* venv\Scripts\Include\
+		xcopy /SQY %EASY_PORTABLE_PYTHON_DIR%\include\*.* venv\Scripts\Include\
+		echo xcopy /SQY %EASY_PORTABLE_PYTHON_DIR%\libs\*.* venv\Scripts\libs\
+		xcopy /SQY %EASY_PORTABLE_PYTHON_DIR%\libs\*.* venv\Scripts\libs\
 	)
 )
 
 @REM https://github.com/woct0rdho/SageAttention/releases
 if not exist "%~dp0SageAttention_Version.txt" (
-	echo https://github.com/woct0rdho/SageAttention/releases/download/v2.2.0-windows/sageattention-2.2.0+cu128torch2.7.1-cp312-cp312-win_amd64.whl> "%~dp0SageAttention_Version.txt"
+	echo https://github.com/woct0rdho/SageAttention/releases/download/v2.2.0-windows.post1/sageattention-2.2.0+cu128torch2.7.1.post1-cp39-abi3-win_amd64.whl> "%~dp0SageAttention_Version.txt"
 )
 set /p SAGE_ATTENTION_VERSION=<"%~dp0SageAttention_Version.txt"
 echo pip install -qq %SAGE_ATTENTION_VERSION%
