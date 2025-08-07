@@ -30,7 +30,7 @@ set /p ARIA_MAX_CONNECTION=<"%~dp0Aria_MaxConnection.txt"
 set ARIA_VER=1.37.0
 set ARIA_NAME=aria2-%ARIA_VER%-win-64bit-build1
 set ARIA_EXE=%~dp0env\%ARIA_NAME%\aria2c.exe
-set ARIA_CMD=%ARIA_EXE% --console-log-level=warn --file-allocation=none --check-certificate=false -x%ARIA_MAX_CONNECTION%
+set ARIA_CMD=%ARIA_EXE% --console-log-level=warn --file-allocation=none --check-certificate=false --disable-ipv6 -x%ARIA_MAX_CONNECTION%
 
 if not exist %ARIA_EXE% (
 	if not exist %~dp0env\ ( mkdir %~dp0env )
