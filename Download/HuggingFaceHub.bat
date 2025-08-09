@@ -7,6 +7,10 @@ pushd %~dp0env
 call %~dp0..\Python\Python_Activate.bat
 if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
+echo python -m pip install -qq -U pip
+python -m pip install -qq -U pip
+if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+
 echo pip install -qq huggingface_hub
 pip install -qq huggingface_hub
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
