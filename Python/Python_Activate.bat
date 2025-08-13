@@ -92,7 +92,7 @@ if not exist %VIRTUAL_ENV_DIR%\ (
 	echo %EASY_PYTHON_CMD% -m venv %VIRTUAL_ENV_DIR%
 	%EASY_PYTHON_CMD% -m venv %VIRTUAL_ENV_DIR%
 
-	if not exist %VIRTUAL_ENV_DIR%\ (
+	if not exist %VIRTUAL_ENV_DIR%\Scripts\activate.bat (
 		echo %EASY_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
 		%EASY_PYTHON_CMD% -m pip install virtualenv --no-warn-script-location
 
@@ -100,7 +100,7 @@ if not exist %VIRTUAL_ENV_DIR%\ (
 		%EASY_PYTHON_CMD% -m virtualenv --copies %VIRTUAL_ENV_DIR%
 	)
 
-	if not exist %VIRTUAL_ENV_DIR%\ (
+	if not exist %VIRTUAL_ENV_DIR%\Scripts\activate.bat (
 		echo "[ERROR] Python 仮想環境を作成できません。Python %EASY_PYTHON_MINOR_VERSION% 系を手動でパスを通してインストールしてください。"
 		pause & exit /b 1
 	)
