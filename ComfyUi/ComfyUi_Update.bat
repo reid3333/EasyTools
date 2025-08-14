@@ -35,8 +35,15 @@ echo python -m pip install -qq -U pip setuptools wheel
 python -m pip install -qq -U pip setuptools wheel
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
+if not exist "%~dp0UninstallModule.txt" ( goto :EASY_UNINSTALL_MODULE_NOT_FOUND )
+set /p UNINSTALL_MODULE=<"%~dp0UninstallModule.txt"
+echo pip uninstall -qq -y %UNINSTALL_MODULE%
+pip uninstall -qq -y %UNINSTALL_MODULE%
+if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+:EASY_UNINSTALL_MODULE_NOT_FOUND
+
 if not exist "%~dp0Torch_Version.txt" (
-	echo torch==2.7.1+cu128 torchvision==0.22.1+cu128 torchaudio==2.7.1+cu128 xformers==0.0.31.post1 --index-url https://download.pytorch.org/whl/cu128> "%~dp0Torch_Version.txt"
+	echo torch==2.8.0+cu128 torchvision==0.23.0+cu128 torchaudio==2.8.0+cu128 --index-url https://download.pytorch.org/whl/cu128> "%~dp0Torch_Version.txt"
 )
 set /p TORCH_VERSION=<"%~dp0Torch_Version.txt"
 echo pip install -qq %TORCH_VERSION%
@@ -45,7 +52,7 @@ if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
 
 @REM https://github.com/woct0rdho/triton-windows/releases
 if not exist "%~dp0Triton_Version.txt" (
-	echo triton-windows==3.3.1.post19> "%~dp0Triton_Version.txt"
+	echo triton-windows==3.4.0.post20> "%~dp0Triton_Version.txt"
 )
 set /p TRITON_VERSION=<"%~dp0Triton_Version.txt"
 echo pip install -qq %TRITON_VERSION%
@@ -76,7 +83,7 @@ if exist %EASY_PORTABLE_PYTHON_DIR%\ (
 
 @REM https://github.com/woct0rdho/SageAttention/releases
 if not exist "%~dp0SageAttention_Version.txt" (
-	echo https://github.com/woct0rdho/SageAttention/releases/download/v2.2.0-windows.post1/sageattention-2.2.0+cu128torch2.7.1.post1-cp39-abi3-win_amd64.whl> "%~dp0SageAttention_Version.txt"
+	echo https://github.com/woct0rdho/SageAttention/releases/download/v2.2.0-windows.post2/sageattention-2.2.0+cu128torch2.8.0.post2-cp39-abi3-win_amd64.whl> "%~dp0SageAttention_Version.txt"
 )
 set /p SAGE_ATTENTION_VERSION=<"%~dp0SageAttention_Version.txt"
 echo pip install -qq %SAGE_ATTENTION_VERSION%
