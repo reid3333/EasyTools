@@ -3,12 +3,12 @@ set -e
 
 # EasyTools Installer Template (Linux)
 # 目的: プロジェクトおよび EasyTools の初期化、セットアップ、必要に応じたモデル等のダウンロードを行う
-# 使い方: bash InstallerTemplate.sh [project_repo_url] [branch]
+# 使い方: bash InstallerTemplate.sh （引数なし: Windows版と同等のインタフェース）
 
-# --- 引数/既定値 ---
+# --- 既定値（Windows版の変数名に合わせる） ---
 PROJECT_NAME=${PROJECT_NAME:-Project}
-PROJECT_URL=${1:-"https://github.com/Zuntan03/${PROJECT_NAME}"}
-PROJECT_BRANCH=${2:-main}
+PROJECT_URL=${PROJECT_URL:-"https://github.com/Zuntan03/${PROJECT_NAME}"}
+PROJECT_BRANCH=${PROJECT_BRANCH:-main}
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 EASY_TOOLS_DIR="${SCRIPT_DIR}/EasyTools"
@@ -76,4 +76,3 @@ case "$yn" in
 esac
 
 echo "[INFO] 完了しました。"
-
