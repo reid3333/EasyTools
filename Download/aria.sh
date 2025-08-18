@@ -13,7 +13,7 @@ if [ -z "$DOWNLOAD_DIR" ] || [ -z "$DOWNLOAD_FILE" ] || [ -z "$DOWNLOAD_URL" ]; 
   exit 1
 fi
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 USE_CURL_FLAG="${SCRIPT_DIR}/ARIA_USE_CURL"
 
 # 既存ファイルのチェック（.aria2 がなければスキップ）
@@ -46,4 +46,3 @@ else
 fi
 
 sleep 1
-

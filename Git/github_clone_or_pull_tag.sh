@@ -14,7 +14,7 @@ GITHUB_REPO="$2"
 BRANCH_NAME="$3"
 TAG_NAME="$4"
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 
 "$SCRIPT_DIR/github_clone_or_pull.sh" "$GITHUB_USER" "$GITHUB_REPO" "$BRANCH_NAME"
 
