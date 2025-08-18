@@ -4,7 +4,7 @@ set -e
 # huggingface_hub を用いたスナップショットダウンロードのラッパー
 # 使い方: bash hugging_face_hub.sh <local_dir> <repo_id> <repo_type> [<allow_patterns>...]
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 ENV_DIR="${SCRIPT_DIR}/env"
 
 mkdir -p "$ENV_DIR"

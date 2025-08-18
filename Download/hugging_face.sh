@@ -21,6 +21,6 @@ HF_DOWNLOAD_URL="${HF_MODEL_CARD}/resolve/main/${REPO_DIR_PREFIX}${DOWNLOAD_FILE
 
 echo "$HF_MODEL_CARD ${REPO_DIR_PREFIX}${DOWNLOAD_FILE}"
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 "$SCRIPT_DIR/aria.sh" "$DOWNLOAD_DIR" "$DOWNLOAD_FILE" "$HF_DOWNLOAD_URL"
 
