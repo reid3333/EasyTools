@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 if [ -f "$SCRIPT_DIR/ARIA_USE_CURL" ]; then
   rm -f "$SCRIPT_DIR/ARIA_USE_CURL"
 fi
