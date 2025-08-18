@@ -13,6 +13,7 @@
 - **依存関係の管理:** Windowsのポータブル環境構築（Portable Git/Python）の思想は引き継ぎつつ、Linuxの標準的なパッケージ管理（`apt`）や仮想環境（`venv`）の利用を基本とします。
 - **コマンドの置換:** Windows固有のコマンド (`chcp`, `where`, `reg`, `PowerShell`) は、Linuxの同等コマンド (`export LANG`, `which`, `command -v`, `sed`, `awk`, `grep`など) に置き換えます。
 - **パスの解決:** Windows形式のパス (`%~dp0`, `%USERPROFILE%`) は、Linux形式 (`$(dirname "$0")`, `$HOME`) に変換します。
+- **インタフェースの維持:** Windowsバッチファイルの入出力インタフェースをBashシェルスクリプトでも完全に維持します。
 
 ## 主な機能（移植対象）
 
