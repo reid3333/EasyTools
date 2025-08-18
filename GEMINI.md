@@ -66,7 +66,7 @@ EasyToolsの主要な機能のLinuxへの移植は、大部分が完了してい
 - **変数:** 変数定義は `VAR="VALUE"` の形式で行い、参照時はダブルクォートで囲みます (`"$VAR"`)。
 - **エラーハンドリング:** コマンドの実行後には `if [ $? -ne 0 ]; then ... fi` の形式でエラーチェックを適切に行います。
 - **可読性:** コメントを活用し、複雑な処理にはその意図を明記します。
-- **コミット時のコメント:** co-authored-byを付与する。ユーザー名はGemini CLIの場合は「gemini-cli」、Codex CLIの場合は「codex-cli」とする。
+- **コミット時のコメント:** co-authored-byを付与する。ユーザー名はGemini CLIの場合は「gemini-cli」、Codex CLIの場合は「codex-cli」とする。メールアドレスは「dummy@example.com」とする。
 
 ## タスク分割方針
 
