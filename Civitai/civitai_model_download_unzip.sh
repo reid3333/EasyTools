@@ -15,7 +15,7 @@ if [ -z "$DOWNLOAD_DIR" ] || [ -z "$DOWNLOAD_FILE" ] || [ -z "$MODEL_ID" ] || [ 
   exit 1
 fi
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 
 TARGET_PATH="${DOWNLOAD_DIR%/}/${DOWNLOAD_FILE}"
 

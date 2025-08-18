@@ -4,7 +4,7 @@ set -e
 # Civitai API Key を保存するヘルパー
 # 使い方: bash civitai_api_key.sh
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SCRIPT_DIR="$(dirname -- "$(realpath -- "${BASH_SOURCE[0]}")")"
 API_KEY_FILE="${SCRIPT_DIR}/CivitaiApiKey.txt"
 
 if [ -f "$API_KEY_FILE" ]; then
