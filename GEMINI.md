@@ -32,18 +32,32 @@
 - **アプリケーション管理:**
     - ComfyUI, Lama Cleaner等のインストール、アップデート、および関連Pythonパッケージの管理。
 
-## 移植作業の進め方（TODO）
+## 移植作業の進め方
 
-1.  **ファイル構成の見直し:**
-    - `.bat`ファイルを`.sh`ファイルにリネームしたファイルを新規作成します。
-2.  **`InstallerTemplate.bat`の移植:**
-    - `InstallerTemplate.sh`を作成し、全体の処理フローの基礎をLinux向けに再設計します。
+EasyToolsの主要な機能のLinuxへの移植は、大部分が完了しています。以下に完了した主な項目と、今後の課題を記します。
+
+### 完了した主な移植作業
+
+1.  **ファイル構成のLinux化:**
+    - 主要な `.bat` ファイルに対応する `.sh` ファイルを作成しました。
+2.  **インストーラーテンプレート:**
+    - `InstallerTemplate.sh` を作成し、Linux環境での基本的な処理フローを実装しました。
 3.  **コア機能の移植:**
-    - `Git`, `Python`, `Download`ディレクトリ内のスクリプトを優先的に移植します。
-    - `Python/Python_Activate.bat` -> `Python/python_activate.sh`: `apt`でのpython-venvの確認と、`python3 -m venv`の実行に置き換えます。
-    - `Git/GitHub_CloneOrPull.bat` -> `Git/github_clone_or_pull.sh`: `git`コマンドは共通ですが、パスの扱いなどを修正します。
+    - **Git関連:** `Git/` ディレクトリ内のクローン・プル機能 (`github_clone_or_pull.sh` など) を移植しました。
+    - **Python関連:** `Python/` ディレクトリ内の仮想環境構築・有効化機能 (`python_activate.sh`) を移植しました。
+    - **ダウンロード関連:** `Download/` ディレクトリ内の `aria2c` や `curl` を利用したダウンロード機能 (`aria.sh`, `hugging_face.sh` など) を移植しました。
 4.  **アプリケーション管理スクリプトの移植:**
-    - `ComfyUi`, `LamaCleaner`等のスクリプトを、移植したコア機能を利用して再実装します。
+    - `ComfyUi`, `LamaCleaner`, `Mosaic`, `SdImageDiet` 等のセットアップ、アップデート、有効化に関するスクリプトの移植を完了しました。
+    - `Civitai` からのモデルダウンロード機能も移植済みです。
+
+### 今後の課題
+
+- **未移植スクリプトの確認:**
+    - `Ffmpeg/`, `Link/`, `LlamaCpp/` など、一部未移植のスクリプトが残っています。これらの必要性を検討し、移植を進めます。
+- **動作テストとデバッグ:**
+    - 移植した各スクリプトが、Ubuntu 24.04 LTS環境で実際に意図通りに動作するか、詳細なテストが必要です。
+- **ドキュメントの更新:**
+    - `README.md` をLinux版の内容に合わせて更新し、使い方を明確にする必要があります。
 
 ## 新しい開発規約 (Linux版)
 
